@@ -1,0 +1,86 @@
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Main Navbar */
+  .navbar-area {
+    width: 100%;
+    height: 60px;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  
+  /* Main layout */
+  .main-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: calc(100vh - 60px); /* Adjust height to exclude Main Navbar */
+  }
+  
+  /* Sub-navbar */
+  .sub-navbar {
+    display: flex;
+    justify-content: space-between; /* Align heading to the left and buttons to the right */
+    align-items: center; /* Center items vertically */
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Task Manager Heading */
+  .sub-navbar .task-heading {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Action Buttons */
+  .sub-navbar .action-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .sub-navbar .action-buttons .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff; /* Primary blue */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .sub-navbar .action-buttons .btn:hover {
+    background-color: #0056b3; /* Darker blue */
+  }
+  
+  /* Content Area */
+  .content-area {
+    padding: 5px;
+    flex-grow: 1;
+    background-color: #fff;
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .filter-dropdown {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  

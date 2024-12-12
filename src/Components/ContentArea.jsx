@@ -35,8 +35,8 @@ const ContentArea = () => {
 
     //colums 
     const columns = [
-        { title: 'Task ID', field: 'id', width: 100 },
-        { title: 'Title', field: 'title', editor: 'input' },
+        { title: 'Task ID', field: 'id', width: 100},
+        { title: 'Title', field: 'title', editor: 'input'},
         { title: 'Description', field: 'description', editor: 'input' },
         {
             title: 'Status',
@@ -50,17 +50,16 @@ const ContentArea = () => {
                     const opt = document.createElement('option');
                     opt.value = option;
                     opt.textContent = option;
-                    opt.selected = option === rowData.status; // Pre-select the current status
+                    opt.selected = option === rowData.status; 
                     select.appendChild(opt);
                 });
     
                 // Handle dropdown change
                 select.addEventListener('change', (event) => {
                     const newStatus = event.target.value;
-                    rowData.status = newStatus; // Update the status in the row's data
+                    rowData.status = newStatus; 
                     console.log(`Row ID: ${rowData.id}, New Status: ${newStatus}`);
-                    // Optionally, update the component state or API call here
-                    cell.getRow().update(rowData); // Update the row with the new data
+                    cell.getRow().update(rowData); 
                 });
     
                 return select;
@@ -89,10 +88,10 @@ const ContentArea = () => {
 
 
     return (
-        <div>
-            <h1>Task Manager</h1>
-            <ReactTabulator data={data} columns={columns} layout="fitData" />
-        </div>
+        <>
+            
+            <ReactTabulator data={data} columns={columns} layout="fitData "/>
+        </>
     );
 };
 
