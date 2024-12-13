@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavbarArea from '../Components/NavbarArea';
 import './Layout.css'
 
 
-const Layout = () => {
+const Layout =({ setFilter }) => {
+    const [statusFilter, setStatusFilter] = useState('All'); // Default filter is "All"
+
+    const handleFilterChange = (event) => {
+        const selectedStatus = event.target.value;
+        setStatusFilter(selectedStatus);
+        setFilter(selectedStatus); // Pass filter status to the parent or ContentArea
+      };
   return (
     <div className="layout-container">
       {/* Main Navbar */}
@@ -12,22 +19,7 @@ const Layout = () => {
 
       <div className="main-layout">
         {/* Sub-navbar for Task Manager and Buttons */}
-        <div className="sub-navbar">
-          <h2 className="task-heading">Task Manager</h2>
-          <div className="action-buttons">
-            <button onClick={() => console.log('Add Task')} className="btn">Add</button>
-            <select
-            //   value={statusFilter}
-            //   onChange={handleFilterChange}
-              className="filter-dropdown"
-            >
-              <option value="All">All</option>
-              <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
-            </select>
-          </div>
-        </div>
+        
 
         {/* Content Area */}
         <div className="content-area">

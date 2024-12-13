@@ -1,6 +1,7 @@
 import React from 'react'
 
-import ContentArea from '../Components/ContentArea'
+
+import Taskmanager from '../Components/Taskmanager'
 
 
 
@@ -9,7 +10,7 @@ const Home = () => {
     <div>
    
 
-    <ContentArea/>
+  <Taskmanager/>
     </div>
   )
 }

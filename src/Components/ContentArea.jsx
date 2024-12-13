@@ -1,37 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { ReactTabulator } from 'react-tabulator';
 import 'react-tabulator/lib/styles.css';
 import 'react-tabulator/lib/css/tabulator.min.css';
 
-const ContentArea = () => {
+const ContentArea = ({data, onDelete }) => {
 //  
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const getData = async () => {
-        try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
-            const tasks = response.data.slice(0, 20).map((task) => ({
-                id: task.id,
-                title: task.title,
-                description: `Task description for ${task.title}`,
-                status: task.completed ? 'Done' : 'To Do',
-            }));
-            setData(tasks);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }; 
-
-    const handleDelete = (id) => {
-        const updatedData = data.filter((task) => task.id !== id);
-        setData(updatedData);
-    };
+console.log(data,"kkkkkkkkkkkkkkkkkkk")
 
     //colums 
     const columns = [
@@ -68,21 +42,21 @@ const ContentArea = () => {
             hozAlign: 'center',
         },
         {
-            title: 'Actions',
-            field: 'actions',
+            title: "Actions",
+            field: "actions",
             formatter: (cell) => {
-                const button = document.createElement('button');
-                button.className = 'btn btn-danger btn-sm';
-                button.textContent = 'Delete';
-                button.onclick = () => {
-                    const rowData = cell.getRow().getData();
-                    handleDelete(rowData.id);
-                };
-                return button;
+              const button = document.createElement("button");
+              button.className = "btn btn-danger btn-sm";
+              button.textContent = "Delete";
+              button.onclick = () => {
+                const rowData = cell.getRow().getData();
+                onDelete(rowData.id); // Call the parent-provided function
+              };
+              return button;
             },
             width: 100,
-            hozAlign: 'center',
-        },
+            hozAlign: "center",
+          },
     ];
 
 
@@ -90,7 +64,7 @@ const ContentArea = () => {
     return (
         <>
             
-            <ReactTabulator data={data} columns={columns} layout="fitData "/>
+            <ReactTabulator data={data}columns={columns} layout="fitData "/>
         </>
     );
 };
