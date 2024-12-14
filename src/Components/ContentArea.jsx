@@ -4,8 +4,9 @@ import 'react-tabulator/lib/styles.css';
 import 'react-tabulator/lib/css/tabulator.min.css';
 
 const ContentArea = ({data, onDelete }) => {
-//  
-console.log(data,"kkkkkkkkkkkkkkkkkkk")
+
+
+
 
     //colums 
     const columns = [
