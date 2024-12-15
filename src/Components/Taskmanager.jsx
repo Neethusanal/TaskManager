@@ -3,6 +3,8 @@ import axios from 'axios'
 import ContentArea from './ContentArea';
 import SubNavbar from './Subnavbar';
 import './Taskmanager.css'
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Taskmanager = () => {
     const [data, setData] = useState([]); // All tasks
@@ -17,9 +19,9 @@ const Taskmanager = () => {
     description: "",
     status: "To Do",
   });
-
+//API FETCHING
   useEffect(() => {
-    // Fetch data from API when the component mounts
+
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -42,7 +44,7 @@ const Taskmanager = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filtering logic whenever filter or data changes
+   
     if (filter === "All") {
       setFilteredData(data);
     } else {
@@ -51,9 +53,30 @@ const Taskmanager = () => {
   }, [filter, data]);
 
   const handleDelete = (id) => {
+    // Filter out the task with the given ID
     const updatedData = data.filter((task) => task.id !== id);
-    setData(updatedData);
+    
+    // Re-index the tasks by setting the ID sequentially
+    const reIndexedData = updatedData.map((task, index) => ({
+      ...task,
+      id: index + 1, // Set the new id starting from 1
+    }));
+  
+    // Update the state with the new, re-indexed data
+    setData(reIndexedData);
+    setFilteredData(reIndexedData);
+  
+    // Display success message
+    Swal.fire({
+      icon: 'success',
+      title: 'Deleted!',
+      text: 'The task has been deleted successfully.',
+      timer: 2000,
+      showConfirmButton: false,
+    });
   };
+  
+  
  
   // Add new task
   const handleAddTask = () => {
@@ -61,23 +84,45 @@ const Taskmanager = () => {
   };
   
   const handleSubmitNewTask = () => {
-    if (!newTask.title || !newTask.description) return;
-
+    if (!newTask.title || !newTask.description) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill out all fields!',
+      });
+      return;
+    }
+  
     const updatedTask = {
       ...newTask,
       id: data.length + 1, // Assign a new ID
     };
-
+  
     const updatedData = [updatedTask, ...data];
     setData(updatedData);
     setFilteredData(updatedData); // Update both states
     setIsModalOpen(false);
     setNewTask({ id: "", title: "", description: "", status: "To Do" });
+  
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: 'New task added successfully.',
+      timer: 2000,
+      showConfirmButton: false,
+    });
   };
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter); // Update filter state
   };
 
+  const handleEdit = (updatedData) => {
+    const updatedDataList = data.map((task) =>
+        task.id === updatedData.id ? { ...task, ...updatedData } : task
+    );
+    setData(updatedDataList);  // Update task data
+    setFilteredData(updatedDataList);  // Update filtered data for display
+};
 
   return (
     <div>
@@ -85,7 +130,7 @@ const Taskmanager = () => {
     <SubNavbar onAdd={handleAddTask} onFilterChange={handleFilterChange} />
 
     {/* ContentArea to display data */}
-    <ContentArea data={filteredData} onDelete={handleDelete}/>
+    <ContentArea data={filteredData} onDelete={handleDelete} onEdit={handleEdit} />
 {/* Modal for adding new Task */}
 {isModalOpen && (
   <div className="modal-overlay">

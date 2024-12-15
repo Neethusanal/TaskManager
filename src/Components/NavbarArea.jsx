@@ -13,16 +13,16 @@ const NavbarArea = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Tasks</Nav.Link>
-            <NavDropdown title="Lists" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <Nav.Link href="#link"></Nav.Link>
+            <NavDropdown title="" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1"></NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
-                Another action
+               
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3"></NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
-                Separated link
+              
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
