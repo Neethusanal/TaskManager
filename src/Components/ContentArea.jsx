@@ -10,7 +10,7 @@ const ContentArea = ({ data, onDelete, onEdit }) => {
 
     // Columns definition
     const columns = [
-        { title: 'Task ID', field: 'id' },
+        { title: 'Task ID', field: 'id' ,width:10 },
         { title: 'Title', field: 'title' },
         { title: 'Description', field: 'description' },
         {
